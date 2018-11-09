@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
-import Page from './Page';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {setImages} from './actions';
+import Page from './Page';
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +22,7 @@ class App extends Component {
     let pages = {1: []};
     let page = 1;
     images.forEach((img, i) => {
-      if(i % 25 === 0 && i > 0) {
+      if(i % 10 === 0 && i > 0) {
         page++;
         pages[page] = [];
       }
@@ -32,11 +36,12 @@ class App extends Component {
     axios.get(url).then((results) => {
       let images = [];
       results.data.forEach((img) => {
-        if(img.author = 'Alejandro Escamilla') {
+        if(img.author === 'Alejandro Escamilla') {
           images.push(img)
         }
       });
-      this._createPages(images)
+      this._createPages(images);
+      this.props.setImages(images);
     });
   }
 
@@ -45,25 +50,32 @@ class App extends Component {
     const pageNumbers = (pages) ? Object.keys(pages).map((page, i) => (
       <button onClick={() => {this._handlePageClick(i + 1)}} key={i}>{page}</button>)
     ) : '';
-
-    return (
-      <div className="App">
-        <header className="App-header">
-
-        </header>
-        <main>
-          <section id="page-navigation">
-            <div id="pageNumbers-container">
-              {pageNumbers}
-            </div>
-          </section>
-          <section id="page-section">
-            <Page images={(pages) ? pages[this.state.currentPage] : []} />
-          </section>
-        </main>
-      </div>
-    );
+    if(this.props.images) {
+      return (
+        <div className="App">
+          <header className="App-header">
+  
+          </header>
+          <main>
+            <section id="page-navigation">
+              <div id="pageNumbers-container">
+                {pageNumbers}
+              </div>
+            </section>
+            <section id="page-section">
+              <Page images={(pages) ? pages[this.state.currentPage] : []} />
+            </section>
+          </main>
+        </div>
+      );
+    }
+    else {
+      return null;
+    }
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({images: state.images});
+const mapActionsToProps = {setImages};
+
+export default connect(mapStateToProps, mapActionsToProps)(App);

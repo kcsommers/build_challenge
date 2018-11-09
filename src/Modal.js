@@ -1,10 +1,14 @@
-import React from 'react'
+import React from 'react';
+import ImageSlider from './ImageSlider';
 
 class Modal extends React.Component {
   render() {
+    const data = this.props.data;
     return (
       <div className="modal-container">
-        <h1>WHATUP MODAL</h1>
+        <div id="slider-container">
+          <ImageSlider image={data} />
+        </div>
       </div>
     );
   }

@@ -12,6 +12,7 @@ class Page extends React.Component {
   }
 
   _showModal = (img) => {
+    console.log('PAGE', img)
     this.setState({showModal: true, modalData: img})
   }
 
@@ -24,12 +25,16 @@ class Page extends React.Component {
         image={img}
         onClick={(img) => {this._showModal(img)}} />
     ));
+    const modal = (this.state.showModal) ? 
+    <Modal 
+      data={this.state.modalData}
+      isVisible={this.state.showModal} /> : '';
     return(
       <section className="page-wrapper">
         <div className="thumbnails-container">
           {thumbnailsMapped}
         </div>
-        <Modal isVisible={this.state.showModal} />
+        {modal}
       </section>
     );
   }
