@@ -109,7 +109,7 @@ Page
 }
 
 .pageNumbers-container button {
-  border: 1px solid #fff;
+  border: 1px solid #fbfbfb;
   width: 40px;
   height: 40px;
   border-radius: 20px;
@@ -207,7 +207,7 @@ MODAL
 #close-btn {
   position: absolute;
   font-size: 2em;
-  color: #fff;
+  color: #fbfbfb;
   z-index: 1000;
   top: 5%;
   right: 5%;
@@ -328,7 +328,7 @@ SLIDER
 
 .slider-arrow {
   font-size: 4em;
-  color: #fff;
+  color: #fbfbfb;
   opacity: 0.6;
   -webkit-transition: all 0.2s ease;
   -o-transition: all 0.2s ease;
@@ -359,7 +359,7 @@ FOOTER
 
 #footer-wrapper p {
   font-size: 1.2em;
-  color: #fff;
+  color: #fbfbfb;
 }
 
 /************************************************************************************

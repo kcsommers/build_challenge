@@ -27,6 +27,7 @@ class App extends Component {
       // push current img into pages object at appropriate page key
       pages[page].push(img)
     });
+    
     this.setState({pages}) // set pages in state to be passed to page component
   }
 

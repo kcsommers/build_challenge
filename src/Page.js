@@ -66,6 +66,7 @@ class Page extends React.Component {
 
   render() {
     const pages = this.props.pages;
+    console.log(pages)
     const pageNumbers = (pages) ? Object.keys(pages).map((page, i) => {
       // for each page, create a corresponding button
       let btnClass = (i === 0) ? `page-active page-btn-${page}` : `page-btn-${page}`;
@@ -94,6 +95,8 @@ class Page extends React.Component {
     <Modal 
       data={this.state.modalData}
       closeModal={this._closeModal} /> : '';
+
+
     return(
       <section className="page-wrapper">
         <div id="page-header">

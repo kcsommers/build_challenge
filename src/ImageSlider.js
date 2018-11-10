@@ -14,7 +14,9 @@ class ImageSlider extends React.Component {
 
   _toggleSlideshow = () => {
     if(!this.state.slideshowInterval) {
-      this.setState({slideshowOn: true, slideshowInterval: setInterval(() => {this._slide(1)}, 4000)})
+      // slide right away to prevent 4 confusing seconds
+      this._slide(1);
+      this.setState({slideshowInterval: setInterval(() => {this._slide(1)}, 4000)})
     }
     else {
       clearInterval(this.state.slideshowInterval);
