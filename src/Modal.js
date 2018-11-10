@@ -11,7 +11,7 @@ const Modal = (props) => {
         <i className="fa fa-times close-icon"></i>
       </button>
       <div id="slider-container">
-        <ImageSlider image={data} />
+        <ImageSlider closeModal={props.closeModal} image={data} />
       </div>
     </div>
   );

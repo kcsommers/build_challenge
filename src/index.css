@@ -23,6 +23,10 @@ button {
           box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+button:focus, a:focus {
+  outline: none;
+}
+
 /************************************************************************************
 Nav
 ************************************************************************************/
@@ -66,11 +70,11 @@ Nav
 #author-link {
   position: absolute;
   top: 8%;
-  right: 5%;
+  right: 2.5%;
 }
 
-#author-link:hover i{
-  color: #f58dab;
+#author-link:hover i, #author-link:focus i{
+  color: #c13149;
 }
 
 #author-link i{
@@ -94,12 +98,12 @@ Page
 }
 
 #page-header h3 {
-  padding-left: 1em;
+  position: absolute;
   color: #fbfbfb;
   font-family: Oxygen;
-  letter-spacing: 0.2em;
-  font-size: 1.5em;
-  margin-bottom: -1.3em;
+  letter-spacing: 0.3em;
+  left: 1.3em;
+  top: 3em;
 }
 
 .pageNumbers-container {
@@ -136,7 +140,8 @@ Page
   background-color: #222;
 }
 
-.pageNumbers-container button:hover {
+.pageNumbers-container button:hover, .pageNumbers-container button:focus{
+  background: #c13149;
   -webkit-box-shadow: 0 6px 10px rgba(0,0,0,0.16), 0 6px 10px rgba(0,0,0,0.23);
           box-shadow: 0 6px 10px rgba(0,0,0,0.16), 0 6px 10px rgba(0,0,0,0.23);
 }
@@ -175,6 +180,13 @@ Thumbnail
   background-color: #000;
   height: 100%;
   width: 100%;
+}
+
+.thumbnail-wrapper button:focus .thumbnail-img {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+      transform: scale(1.2);
+  opacity: 0.5; 
 }
 
 .thumbnail-wrapper:hover .thumbnail-img {
@@ -343,6 +355,37 @@ SLIDER
   opacity: 1;
 }
 
+#slide-number-container {
+  position: absolute;
+  text-align: center;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#slide-number-container p{
+  font-size: 1.5em;
+  color: #888;
+  font-family: Oxygen;
+}
+
+#expand-btn {
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  position: absolute; 
+  bottom: 5%;
+  right: 5%;
+}
+
+#expand-btn:hover, #expand-btn:focus {
+  opacity: 1;
+}
+
+#expand-btn i {
+  color: #fbfbfb;
+  font-size: 2em;
+}
+
 /************************************************************************************
 FOOTER
 ************************************************************************************/
@@ -505,6 +548,7 @@ Animations
 }
 
 .pop-in {
+  display: inline-block;
   -webkit-animation-name: pop-in;
           animation-name: pop-in;
   -webkit-animation-duration: 0.4s;
@@ -549,7 +593,10 @@ media queries
 
 @media only screen and (max-width: 900px) {
   .thumbnail-wrapper {
-    height: 200px;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 50%;
+            flex: 1 1 50%;
+    max-width: 50%;
   }
 }
 
@@ -558,8 +605,14 @@ media queries
     font-size: 2em;
   }
 
+  #author-link i{
+    font-size: 1.5em;
+  }
+
   .thumbnail-wrapper {
-    height: 125px;
-    padding: 0.2em;
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 100%;
+            flex: 1 1 100%;
+    max-width: 100%;
   }
 }
