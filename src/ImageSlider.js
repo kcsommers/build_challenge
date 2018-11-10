@@ -8,6 +8,17 @@ class ImageSlider extends React.Component {
     this.state = {
       // find the index of the image prop in redux store  
       currentImageIndex: this.props.images.findIndex((img) => img.id === this.props.image.id),
+      slideshowInterval: null
+    }
+  }
+
+  _toggleSlideshow = () => {
+    if(!this.state.slideshowInterval) {
+      this.setState({slideshowOn: true, slideshowInterval: setInterval(() => {this._slide(1)}, 4000)})
+    }
+    else {
+      clearInterval(this.state.slideshowInterval);
+      this.setState({slideshowInterval: null})
     }
   }
 
@@ -32,10 +43,19 @@ class ImageSlider extends React.Component {
       return <Slide image={img} key={i} />
     });
 
+    let slideshowIcon = (this.state.slideshowInterval) ? 
+    <i key="pause" className="fa fa-pause pop-in"></i> : <i key="play" className="fa fa-play-circle pop-in"></i>
+
     // display the slide at the found index
     let currentSlide = [slidesMapped[index]];
     return (
       <div id="slider-container">
+        <div id="slideshow-controls">
+          <button onClick={this._toggleSlideshow}>
+            {slideshowIcon}
+          </button>
+        </div>
+
         <div id="slider-arrows">
           <button onClick={() => this._slide(-1)}>
             <i className="slider-arrow fa fa-angle-left"></i>
