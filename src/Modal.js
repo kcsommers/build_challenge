@@ -6,6 +6,9 @@ class Modal extends React.Component {
     const data = this.props.data;
     return (
       <div className="modal-container">
+        <button id="close-btn" onClick={this.props.closeModal}>
+          <i className="fa fa-times close-icon"></i>
+        </button>
         <div id="slider-container">
           <ImageSlider image={data} />
         </div>

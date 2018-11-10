@@ -7,15 +7,12 @@ class Thumbnail extends React.Component {
     let url = `http://source.unsplash.com/${sourceArr[sourceArr.length - 1]}`
     return(
       <a onClick={() => this.props.onClick(image)} className="thumbnail-wrapper">
-        <img style={styles.img} src={url} />
+        <img 
+          className="thumbnail-img" 
+          src={url}
+          onLoad={this.props.onLoad} />
       </a>
     )
-  }
-}
-
-const styles = {
-  img: {
-    width: '100%'
   }
 }
 

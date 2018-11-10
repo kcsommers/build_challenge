@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
 import {setImages} from './actions';
+import Nav from './Nav';
+import {Footer} from './Footer';
 import Page from './Page';
 
 
@@ -10,19 +12,14 @@ class App extends Component {
     super(props);
     this.state = {
       pages: null,
-      currentPage: 1
     }
-  }
-
-  _handlePageClick = (page) => {
-    this.setState({currentPage: page})
   }
 
   _createPages = (images) => {
     let pages = {1: []};
     let page = 1;
     images.forEach((img, i) => {
-      if(i % 10 === 0 && i > 0) {
+      if(i % 9 === 0 && i > 0) {
         page++;
         pages[page] = [];
       }
@@ -47,25 +44,17 @@ class App extends Component {
 
   render() {
     const pages = this.state.pages;
-    const pageNumbers = (pages) ? Object.keys(pages).map((page, i) => (
-      <button onClick={() => {this._handlePageClick(i + 1)}} key={i}>{page}</button>)
-    ) : '';
-    if(this.props.images) {
+    if(pages) {
       return (
         <div className="App">
-          <header className="App-header">
-  
-          </header>
+          <Nav />
           <main>
-            <section id="page-navigation">
-              <div id="pageNumbers-container">
-                {pageNumbers}
-              </div>
-            </section>
             <section id="page-section">
-              <Page images={(pages) ? pages[this.state.currentPage] : []} />
+              <Page 
+                pages={pages} />
             </section>
           </main>
+          <Footer />
         </div>
       );
     }
