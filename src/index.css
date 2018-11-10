@@ -10,6 +10,10 @@ img {
   display: block;
 }
 
+.no-scroll {
+  overflow-y: hidden;
+}
+
 button {
   background: none;
   border: none;

@@ -39,10 +39,16 @@ class Page extends React.Component {
 
   // opens the modal with the appropriate image passed in
   _showModal = (img) => {
+    // add class to body to prevent scrolling in background
+    let body = document.querySelector('body');
+    body.classList.add('no-scroll');
     this.setState({showModal: true, modalData: img})
   }
 
   _closeModal = () => {
+    let body = document.querySelector('body');
+    // remove no scoll class
+    body.classList.remove('no-scroll');
     const modal = document.getElementsByClassName('modal-container')[0];
     // fade out modal and reset state after timeout
     modal.classList.add('fade-out');
@@ -66,7 +72,6 @@ class Page extends React.Component {
 
   render() {
     const pages = this.props.pages;
-    console.log(pages)
     const pageNumbers = (pages) ? Object.keys(pages).map((page, i) => {
       // for each page, create a corresponding button
       let btnClass = (i === 0) ? `page-active page-btn-${page}` : `page-btn-${page}`;

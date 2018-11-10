@@ -12,11 +12,30 @@ class ImageSlider extends React.Component {
     }
   }
 
+  _handleArrowClick = (n) => {
+    // if theres an interval running...
+    if(this.state.slideshowInterval) {
+      // ... clear it, 
+      let currInterval = this.state.slideshowInterval;
+      console.log(currInterval)
+      clearInterval(currInterval)
+      // slide the image,
+      this._slide(n);
+      // restart it
+      let intervalId = setInterval(() => {this._slide(1)}, 4000)
+      this.setState({slideshowInterval: intervalId})
+    }
+    else {
+      this._slide(n);
+    }
+  }
+
   _toggleSlideshow = () => {
     if(!this.state.slideshowInterval) {
       // slide right away to prevent 4 confusing seconds
       this._slide(1);
-      this.setState({slideshowInterval: setInterval(() => {this._slide(1)}, 4000)})
+      let intervalId = setInterval(() => {this._slide(1)}, 4000)
+      this.setState({slideshowInterval: intervalId})
     }
     else {
       clearInterval(this.state.slideshowInterval);
@@ -34,6 +53,14 @@ class ImageSlider extends React.Component {
     else if(index === length - 1 && n === 1) index = 0;
     else index += n;
     this.setState({currentImageIndex: index});
+  }
+
+  componentWillUnmount() {
+    if(this.state.slideshowInterval) {
+      // clear interval on unmount if one exists
+      let intervalId = this.state.slideshowInterval;
+      clearInterval(intervalId);
+    }
   }
 
   render() {
@@ -59,10 +86,10 @@ class ImageSlider extends React.Component {
         </div>
 
         <div id="slider-arrows">
-          <button onClick={() => this._slide(-1)}>
+          <button onClick={() => {this._handleArrowClick(-1)}}>
             <i className="slider-arrow fa fa-angle-left"></i>
           </button>
-          <button onClick={() => this._slide(1)}>
+          <button onClick={() => {this._handleArrowClick(1)}}>
             <i className="slider-arrow fa fa-angle-right"></i>
           </button>
         </div>
