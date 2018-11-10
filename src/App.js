@@ -16,29 +16,34 @@ class App extends Component {
   }
 
   _createPages = (images) => {
-    let pages = {1: []};
+    let pages = {1: []}; // declare object with at least one page
     let page = 1;
     images.forEach((img, i) => {
+      // for every 9 images, increment page number and create a new page 
       if(i % 9 === 0 && i > 0) {
         page++;
         pages[page] = [];
       }
+      // push current img into pages object at appropriate page key
       pages[page].push(img)
     });
-    this.setState({pages})
+    this.setState({pages}) // set pages in state to be passed to page component
   }
 
   componentDidMount() {
     const url = 'https://picsum.photos/list';
+
+    // request photos from picsum on component mount
     axios.get(url).then((results) => {
       let images = [];
       results.data.forEach((img) => {
+        // filter results by author
         if(img.author === 'Alejandro Escamilla') {
           images.push(img)
         }
       });
-      this._createPages(images);
-      this.props.setImages(images);
+      this._createPages(images); // pass filtered images to create pages function
+      this.props.setImages(images); // update images in redux store
     });
   }
 
@@ -49,10 +54,7 @@ class App extends Component {
         <div className="App">
           <Nav />
           <main>
-            <section id="page-section">
-              <Page 
-                pages={pages} />
-            </section>
+            <Page pages={pages} />
           </main>
           <Footer />
         </div>

@@ -1,19 +1,22 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Slide from './Slide'
 
 class ImageSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      // find the index of the image prop in redux store  
       currentImageIndex: this.props.images.findIndex((img) => img.id === this.props.image.id),
     }
   }
 
   _slide = (n) => {
-    this.setState({currentClass: 'slider-image slide-out'})
     let index = this.state.currentImageIndex;
     let imagesArr = this.props.images;
     let length = imagesArr.length
+    // increment or decrement the index by n
+    // looping to the beginning or the end of array depending on current index
     if(index === 0 && n === -1) index = length - 1;
     else if(index === length - 1 && n === 1) index = 0;
     else index += n;
@@ -24,14 +27,13 @@ class ImageSlider extends React.Component {
     let index = this.state.currentImageIndex;
     let imagesArr = this.props.images;
 
-    let imagesMapped = imagesArr.map((img, i) => {
-      let sourceArr = img.post_url.split('/');
-      let url = `http://source.unsplash.com/${sourceArr[sourceArr.length - 1]}`;
-      return <img src={url} key={i} className="slider-image slide-in" />
+    let slidesMapped = imagesArr.map((img, i) => {
+      // create a slide for each image in redux store
+      return <Slide image={img} key={i} />
     });
 
-    let displayedImages = [imagesMapped[index]];
-
+    // display the slide at the found index
+    let currentSlide = [slidesMapped[index]];
     return (
       <div id="slider-container">
         <div id="slider-arrows">
@@ -45,7 +47,7 @@ class ImageSlider extends React.Component {
 
         <div id="slider-wrapper">
           <div id="image-container">
-            {displayedImages}
+            {currentSlide}
           </div>
         </div>
       </div>

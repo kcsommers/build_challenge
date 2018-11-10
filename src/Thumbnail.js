@@ -6,12 +6,15 @@ class Thumbnail extends React.Component {
     let sourceArr = image.post_url.split('/');
     let url = `http://source.unsplash.com/${sourceArr[sourceArr.length - 1]}`
     return(
-      <a onClick={() => this.props.onClick(image)} className="thumbnail-wrapper">
-        <img 
-          className="thumbnail-img" 
-          src={url}
-          onLoad={this.props.onLoad} />
-      </a>
+      <div className="thumbnail-wrapper">
+        <button onClick={() => this.props.onClick(image)} >
+          <img 
+            className="thumbnail-img" 
+            alt={image.post_url}
+            src={url}
+            onLoad={this.props.onLoad} />
+        </button>
+      </div>
     )
   }
 }
