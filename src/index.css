@@ -34,6 +34,7 @@ Nav
   font-family: Oxygen;
   font-size: 3em;
   font-weight: 100;
+  transition: all 0.2s ease;
 }
 
 #logo-wrapper p {
@@ -74,6 +75,7 @@ Page
   font-family: Oxygen;
   letter-spacing: 0.2em;
   font-size: 1.5em;
+  margin-bottom: -1.3em;
 }
 
 .pageNumbers-container {
@@ -125,6 +127,7 @@ Thumbnail
   overflow: hidden;
   position: relative;
   padding: 0.5em;
+  transition: all 0.2s ease;
 }
 
 .thumbnail-wrapper button {
@@ -333,4 +336,25 @@ Animations
   animation-duration: 1s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
+}
+
+/************************************************************************************
+media queries
+************************************************************************************/
+
+@media only screen and (max-width: 900px) {
+  .thumbnail-wrapper {
+    height: 200px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  #logo-wrapper h1 {
+    font-size: 2em;
+  }
+
+  .thumbnail-wrapper {
+    height: 125px;
+    padding: 0.2em;
+  }
 }
